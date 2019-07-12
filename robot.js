@@ -2,6 +2,10 @@ var state = {
     robotPosition: 0,
     mapSize: 5,
     icon: 'R'
+    // icon；{
+        //img:'xxxxx/x/x/x.jpg',
+        //size:10;
+    //}
 }
 
 var histories = [];
@@ -17,8 +21,11 @@ function availablePosition(newPosition, mapSize) {
 function move(newPosition) {
     if (availablePosition(newPosition, state.mapSize)) {
         var oldState = Object.assign({},state);
+       // shallow var oldState = Object.assign({},state,{icon:object.assign({},state.icon)});
+       // deep copy var oldState=JSON.parse(JSPON.stringify(state));
         histories.push(oldState);
         state.robotPosition = newPosition;
+        //state.icon.size=0;
         render();
         return true;
     } else {
@@ -31,6 +38,7 @@ function render() {
     mapCells.forEach((aCell, index) => {
         if (index === state.robotPosition) {
             aCell.innerHTML = state.icon;
+            //aCell.innerHTML='';
         } else {
             aCell.innerHTML = '';
         }
